@@ -2,7 +2,7 @@ name: "Project Automation (Move to In Progress)"
 
 on:
   issues:
-    types: [assigned] # 이슈에 담당자가 지정되었을 때만 트리거
+    types: [assigned] # 이슈에 담당자가 지정되었을 때 트리거
 
 jobs:
   move-to-in-progress:
@@ -13,13 +13,11 @@ jobs:
     steps:
       - name: Move Issue to In Progress Column
         env:
-          # GitHub Actions가 기본 제공하는 보안 토큰을 활용합니다.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ORGANIZATION_NAME: "f-mac-mows"
-          PROJECT_NUMBER: "3" # 프로젝트 URL 맨 끝에 붙은 숫자 (예: /projects/1)
-          COLUMN_NAME: "In Progress" # 이동할 목적지 칼럼 이름
+          PROJECT_NUMBER: "3"
+          COLUMN_NAME: "In Progress"
         run: |
-          # 1. GitHub CLI를 이용해 프로젝트의 글로벌 ID를 조회합니다.
           PROJECT_ID=$(gh api graphql -f query='
             query($org: String!, $number: Int!) {
               user(login: $org) {
@@ -28,13 +26,15 @@ jobs:
               organization(login: $org) {
                 projectV2(number: $number) { id }
               }
-            }' -F org="$ORGANIZATION_NAME" -F number=$PROJECT_NUMBER --template '
-            {{distinct .data.user.projectV2.id .data.organization.projectV2.id}}')
+            }' -F org="$ORGANIZATION_NAME" -F number=$PROJECT_NUMBER \
+            --template '{{if .data.user.projectV2}}{{.data.user.projectV2.id}}{{else if .data.organization.projectV2}}{{.data.organization.projectV2.id}}{{end}}' | tr -d '[:space:]')
 
           if [ -z "$PROJECT_ID" ]; then
             echo "❌ 프로젝트를 찾을 수 없습니다. 설정한 Org 이름과 프로젝트 번호를 확인해주세요."
             exit 1
           fi
+
+          echo "🎯 찾은 프로젝트 ID: $PROJECT_ID"
 
           # 2. 이슈를 해당 프로젝트에 아이템으로 링크(추가)하고 아이템 ID를 가져옵니다.
           ITEM_ID=$(gh api graphql -f query='
@@ -42,7 +42,7 @@ jobs:
               addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
                 item { id }
               }
-            }' -F project="$PROJECT_ID" -F content="${{ github.event.issue.node_id }}" --template '{{.data.addProjectV2ItemById.item.id}}')
+            }' -F project="$PROJECT_ID" -F content="${{ github.event.issue.node_id }}" --template '{{.data.addProjectV2ItemById.item.id}}' | tr -d '[:space:]')
 
           # 3. 'Status' 필드의 ID와 'In Progress' 옵션의 ID를 조회합니다.
           FIELDS=$(gh api graphql -f query='
