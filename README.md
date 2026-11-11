@@ -1,3 +1,33 @@
+# FactQ · 뉴스 속 숫자를 공식 통계와 대조하는 PoC
+
+### 한국어
+
+> 팀 저장소 [f-mac-mows/perfect-structure](https://github.com/f-mac-mows/perfect-structure)의 포크입니다. 이 포크의 주인(정효원)은 5개 파트 중 **1번 파트(기사 수집 → Claim 추출)**를 혼자 맡았습니다.
+
+| | |
+|---|---|
+| 프로젝트 | 멋쟁이사자처럼 AI·자연어처리 집중 과정 기업 연계 프로젝트, 2026.07.10~09.01 (최종 발표 09.02), 5명 |
+| 내 담당 | 1번 파트(크롤링 → 정제 → 문장 분리 → LLM Claim 추출), 정답 데이터와 평가셋, 팀 파이프라인 통합, 최종 발표 질의응답 |
+| 결과 | 동결 구성(HCX-007 · thinking low · 프롬프트 v2.2)의 Claim 검출 F1: dev 18기사 0.982 · test 40기사 0.762 · 무작위 블라인드 25기사 0.817. 뒷단 파트와 합의한 claims.jsonl 17필드 |
+| 내 코드 | 최종 [pipeline_260826/src](source/Total%20Logic/pipeline_260826/src) · 진입점 [run01_url.py](source/Total%20Logic/pipeline_260826/run01_url.py) · [1번 파트 통합 안내](source/Total%20Logic/pipeline_260826/README_1번_통합.md)<br>8월 13일판과 테스트 [test/01-news-parser](test/01-news-parser) |
+
+아래 연구 계획서와 일부 문서의 수치(HCX-005, F1 0.748 등)는 프로젝트 중간(8월 중순)의 기록입니다. 최종 수치는 위 표와 통합 안내를 기준으로 합니다.
+
+### 日本語
+
+> チームのリポジトリ [f-mac-mows/perfect-structure](https://github.com/f-mac-mows/perfect-structure) のフォークです。このフォークの持ち主（鄭曉元）は、5つのパートのうち**1番パート（記事の収集 → Claimの抽出）**を一人で担当しました。
+
+| | |
+|---|---|
+| プロジェクト | LIKELION AI・自然言語処理集中課程の企業連携プロジェクト、2026.07.10〜09.01（最終発表 09.02）、5名 |
+| 担当 | 1番パート（クロール → クリーニング → 文分割 → LLMによるClaim抽出）、正解データと評価セット、チームのパイプラインへの統合、最終発表の質疑応答 |
+| 結果 | 固定した構成（HCX-007 · thinking low · プロンプトv2.2）でのClaim検出F1：dev 18記事 0.982、test 40記事 0.762、無作為ブラインド 25記事 0.817。後段のパートと合意したclaims.jsonlの17フィールド |
+| コード | 最終版 [pipeline_260826/src](source/Total%20Logic/pipeline_260826/src) · エントリーポイント [run01_url.py](source/Total%20Logic/pipeline_260826/run01_url.py) · [1番パートの統合ガイド](source/Total%20Logic/pipeline_260826/README_1번_통합.md)（韓国語）<br>8月13日版とテスト [test/01-news-parser](test/01-news-parser) |
+
+以下の研究計画書と一部のドキュメントの数値（HCX-005、F1 0.748など）は、プロジェクト途中（8月中旬）の記録です。最終的な数値は上の表と統合ガイドを基準にしてください。
+
+---
+
 # [연구 계획서]
 > ## 공공데이터 연계 AI 기반 뉴스 사실검증 시스템 PoC 개발
 ## 0. 프로젝트 개요
