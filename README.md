@@ -12,6 +12,7 @@
 | 내 코드 | 최종 [pipeline_260826/src](source/Total%20Logic/pipeline_260826/src) · 진입점 [run01_url.py](source/Total%20Logic/pipeline_260826/run01_url.py) · [1번 파트 통합 안내](source/Total%20Logic/pipeline_260826/README_1번_통합.md)<br>8월 13일판과 테스트 [test/01-news-parser](test/01-news-parser) |
 
 아래 연구 계획서와 일부 문서의 수치(HCX-005, F1 0.748 등)는 프로젝트 중간(8월 중순)의 기록입니다. 최종 수치는 위 표와 통합 안내를 기준으로 합니다.
+기사 원문이 들어 있는 생성물(`data/posts/`, `static/data/frontend_mock_db.json`)은 이 포크에 두지 않습니다. 파이프라인과 `scripts/build_frontend_mock_db.py`를 실행하면 다시 만들어집니다.
 
 ### 日本語
 
@@ -25,6 +26,7 @@
 | コード | 最終版 [pipeline_260826/src](source/Total%20Logic/pipeline_260826/src) · エントリーポイント [run01_url.py](source/Total%20Logic/pipeline_260826/run01_url.py) · [1番パートの統合ガイド](source/Total%20Logic/pipeline_260826/README_1번_통합.md)（韓国語）<br>8月13日版とテスト [test/01-news-parser](test/01-news-parser) |
 
 以下の研究計画書と一部のドキュメントの数値（HCX-005、F1 0.748など）は、プロジェクト途中（8月中旬）の記録です。最終的な数値は上の表と統合ガイドを基準にしてください。
+記事の原文を含む生成物（`data/posts/`、`static/data/frontend_mock_db.json`）はこのフォークに置いていません。パイプラインと `scripts/build_frontend_mock_db.py` を実行すると再生成されます。
 
 ---
 

@@ -255,3 +255,7 @@ $RECYCLE.BIN/
 *.jsonl
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,python,dotenv,linux
+### 기사 원문이 들어 있는 생성물 (공개하지 않음. run01_url.py, scripts/build_frontend_mock_db.py를 실행하면 다시 생긴다)
+source/Total Logic/data/posts/
+source/Total Logic/pipeline_260826/data/posts/
+source/Total Logic/static/data/frontend_mock_db.json
